@@ -6,27 +6,46 @@ Deck::Deck() {
 }
 
 void Deck::refreshDeck() {
-    deck.clear();
-    char ranks[] = {'A','2','3','4','5','6','7','8','9','10','J','Q','K'};
-    char suits[] = {'S','H','D','C'};
+    int incrementer = 0;
+    char suits[] = "SHDC";
+    char ranks[] = {'A','2','3','4','5','6','7','8','9','T','J','Q','K'};
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 13; j++) {
-            deck.push_back(Card(ranks[i],suits[j]));
+            deck[incrementer] = Card(ranks[j], suits[i]);
+            incrementer++;
         }
     }
+    top = 0;
 }
 
 void Deck::shuffle() {
-    std::random_shuffle(deck.begin, deck.end );
+    std::random_shuffle(begin(deck), end(deck) );
 }
 
 int Deck::cardsLeft() {
-    return deck.size();
+    return DECK_SIZE - top+1;
 }
 
 void Deck::showDeck() {
     int counter = 0;
-    for (vector<Card>::iterator it = deck.begin; it != deck.end; ++it ) {
+    cout << "Deck\n";
+    for (int i = 0; i < DECK_SIZE; i++) {
+        deck[i].showCard();
+        //cout << "i/12: " << i/12 << " i%12: " << i%12 << " i: " << i << endl;
+        if (counter > 11) {
+            cout << endl;
+            counter = 0;
+        } else {
+            counter++;
+        }
         
     }
+    cout << endl << endl;
+}
+
+Card Deck::deal() {
+    Card toDeal;
+    toDeal = deck[top];
+    top++;
+    return toDeal;
 }

@@ -1,6 +1,5 @@
 #ifndef CARD_H
 #define CARD_H
-#include <cctype>
 #include <iostream>
 
 class Card {

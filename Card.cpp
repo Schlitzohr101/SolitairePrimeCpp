@@ -1,12 +1,16 @@
 #include "Card.h"
 
+
+using namespace std;
+
 Card::Card() {
     rank = ' ';
     suit = ' ';
 }
 
 Card::Card(char r, char s) {
-    rank = toupper(r);
+    // rank = toupper(r);
+    rank = r;
     suit = s;
 }
 
@@ -31,7 +35,7 @@ int Card::getRank() {
         break;
         case '9': num = 9;
         break;
-        case '10': num = 10;
+        case 'T': num = 10;
         break;
         case 'J': num = 10;
         break;
@@ -57,6 +61,13 @@ void Card::setSuit(char s) {
     suit = s;
 }
 
+
+
 void Card::showCard() {
-    std::cout << rank << suit << ", ";
+    if (rank == 'T') {
+        cout << "10" << suit << ", ";
+    } else
+    {
+        cout << rank << suit << ", ";   
+    } 
 }
