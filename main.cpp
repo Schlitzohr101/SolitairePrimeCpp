@@ -2,14 +2,7 @@
 //CECS 282-05
 //Prog - 0 Happy Birthday
 //Aug 29, 2019
-#include <iostream>
-#include "Deck.h"
-
-using namespace std;
-
-void mainMenu();
-void playPrime(Deck);
-
+#include "header.h"
 
 int main() {
     int choice;
@@ -46,10 +39,25 @@ void playPrime(Deck ourDeck) {
         Card current = ourDeck.deal();
         stack += current.getRank();
         current.showCard();
-        if (stack == 2 || (stack%3 != 0 && stack%2 != 0 && stack != 1)) {
-            cout << "Prime:" << stack << endl;
-            stack = 0;
-            pile++;
+        switch (stack)
+        {
+        case 2: winnerPile(stack,pile);
+        break;
+        case 3: winnerPile(stack,pile);
+        break;
+        case 5: winnerPile(stack,pile);
+        break;
+        case 7: winnerPile(stack,pile);
+        break;
+        default: 
+            if (stack != 1) {
+                if(stack%2 != 0 && stack%3 != 0 && stack%5 != 0 && stack%7 != 0) {
+                    cout << "Prime:" << stack << endl;
+                    stack = 0;
+                    pile++;
+                }
+            }
+            break;
         }
     }
     if (stack == 0) {
@@ -59,6 +67,12 @@ void playPrime(Deck ourDeck) {
         cout << "Loser" << endl << endl;
     }
     
+}
+
+void winnerPile(int &stack, int &pile) {
+    cout << "Prime:" << stack << endl;
+    stack = 0;
+    pile++;     
 }
 
 void mainMenu() {

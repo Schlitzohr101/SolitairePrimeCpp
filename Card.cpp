@@ -1,7 +1,4 @@
-#include "Card.h"
-
-
-using namespace std;
+#include "header.h"
 
 Card::Card() {
     rank = ' ';
